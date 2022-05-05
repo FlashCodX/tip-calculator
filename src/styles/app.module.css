@@ -1,0 +1,135 @@
+.container{
+  min-height: 100vh;
+  background: var(--app-background) ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container > h1{
+  padding-bottom: 59px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.card{
+min-width: 900px;
+background: white;
+display: grid;
+grid-template-columns: repeat(2,1fr);
+gap: 30px;
+padding: 40px;
+border-radius: 20px;
+}
+
+.inputsContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.boxContainer{
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.inputContainer{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.inputContainer > img{
+position: absolute;
+left: 10px;
+}
+
+.inputContainer > input{
+  padding:10px  0 ;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: none;
+  background: var(--very-light-grayish);
+text-align: end;
+  width: 100%;
+}
+
+
+.tips{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+
+
+.tips > button{
+  transition: .5s;
+  cursor: pointer;
+  height: 50px;
+  border-radius: 10px;
+  background: var(--card-background);
+  color: white;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.tips > button:hover{
+  color: var(--card-background);
+  background: var(--app-background);
+  transform: scale(1.03);
+}
+
+.tips >button:last-child{
+  background: white;
+  color: var(--very-dark-cyan);
+  background: var(--very-light-grayish);
+}
+
+.label{
+  font-size: 1rem;
+}
+
+.resultsContainer{
+  color: white;
+  padding: 35px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+  background: var(--very-dark-cyan);
+}
+
+.resultsContainer > button{
+  cursor: pointer;
+  min-height: 50px;
+  border-radius: 10px;
+  border: none;
+  background: var(--app-background);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.tipAmount{
+  display: flex;
+  justify-content: space-between;
+}
+
+.resultsContainer .tipAmount:nth-child(2n){
+  height: 100%;
+}
+
+.tipAmount > p{
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--app-background);
+}
+
+.tipInfo > h1{
+  font-size: 1rem;
+}
