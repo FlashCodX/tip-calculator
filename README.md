@@ -1,4 +1,4 @@
-# Intro Section
+# Tip Calculator
 
 # ![preview](./src/assets/screenshot.png)
 
