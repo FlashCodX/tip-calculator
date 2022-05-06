@@ -23,6 +23,7 @@ function App() {
         Spli <br /> tter
       </h1>
       <div className={card}>
+        
         <div className={inputsContainer}>
           <div className={boxContainer}>
             <h1 className={label}>Bill</h1>
