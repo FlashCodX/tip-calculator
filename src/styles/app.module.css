@@ -15,6 +15,7 @@
 
 .card{
 min-width: 900px;
+max-width: 1000px;
 background: white;
 display: grid;
 grid-template-columns: repeat(2,1fr);
@@ -67,6 +68,7 @@ text-align: end;
 
 
 .tips > button{
+  position: relative;
   transition: .5s;
   cursor: pointer;
   height: 50px;
@@ -78,16 +80,39 @@ text-align: end;
   font-weight: bold;
 }
 
+
+
+
+
 .tips > button:hover{
   color: var(--card-background);
   background: var(--app-background);
   transform: scale(1.03);
 }
 
-.tips >button:last-child{
-  background: white;
+.customBtn{
+  position: relative;
+  color: var(--very-dark-cyan) !important;
+  background: var(--very-light-grayish) !important;
+}
+
+.customBtn > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: var(--very-light-grayish); */
+  width: inherit;
+  height: 50px;
+}
+
+.customInput{
+  height: 50px;
+  font-size: 20px;
+  background: red;
   color: var(--very-dark-cyan);
-  background: var(--very-light-grayish);
+  font-weight: bold;
+  border: none;
+  text-align: right;
 }
 
 .label{

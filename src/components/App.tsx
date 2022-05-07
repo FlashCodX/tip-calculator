@@ -14,8 +14,10 @@ function App() {
     peopleContainer,
     resultsContainer,
     tipAmount,
+    customInput,
     label,
     boxContainer,
+    customBtn,
     tipInfo,
   } = styles;
 
@@ -23,6 +25,10 @@ function App() {
   const [bill, setBill] = useState(0)
   const [people, setPeople] = useState(0)
   const [tip, setTip] = useState(5);
+  const [custom, setCustom] = useState(false);
+  const [customTip, setCustomTip] = useState(0);
+
+
 
   return (
     <main className={container}>
@@ -42,12 +48,20 @@ function App() {
           <div className={boxContainer}>
             <h1 className={label}>Select Top %</h1>
             <div className={tips}>
-              <button>5%</button>
-              <button>10%</button>
-              <button>15%</button>
-              <button>25%</button>
-              <button>50%</button>
-              <button>Custom</button>
+              <button onClick={()=>setTip(5)}>5%</button>
+              <button onClick={()=>setTip(10)}>10%</button>
+              <button onClick={()=>setTip(15)}>15%</button>
+              <button onClick={()=>setTip(25)}>25%</button>
+              <button onClick={()=>setTip(50)}>50%</button>
+              <button className={customBtn} onClick={()=>setCustom(true)}>
+                {!custom &&<div>Custom</div>}
+                {custom && (
+
+<input type="number" className={customInput} value={customTip} onChange={(e)=>setCustomTip(parseInt(e.target.value))} />
+
+
+                )}
+              </button>
             </div>
           </div>
 
@@ -55,7 +69,7 @@ function App() {
             <h1 className={label}>Number of People</h1>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
-              <input type="number" />
+              <input className={customInput} type="number" />
             </div>
           </div>
         </div>
