@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "../styles/app.module.css";
 
 const dollar = require("../assets/icon-dollar.svg").default;
@@ -17,13 +18,18 @@ function App() {
     boxContainer,
     tipInfo,
   } = styles;
+
+
+  const [bill, setBill] = useState(0)
+  const [people, setPeople] = useState(0)
+  const [tip, setTip] = useState(5);
+
   return (
     <main className={container}>
       <h1>
         Spli <br /> tter
       </h1>
       <div className={card}>
-        
         <div className={inputsContainer}>
           <div className={boxContainer}>
             <h1 className={label}>Bill</h1>
