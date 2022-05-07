@@ -14,7 +14,6 @@
 }
 
 .card{
-min-width: 900px;
 max-width: 1000px;
 background: white;
 display: grid;
@@ -81,9 +80,6 @@ text-align: end;
 }
 
 
-
-
-
 .tips > button:hover{
   color: var(--card-background);
   background: var(--app-background);
@@ -108,7 +104,8 @@ text-align: end;
 .customInput{
   height: 50px;
   font-size: 20px;
-  background: red;
+  max-width: 120px;
+  width: fit-content;
   color: var(--very-dark-cyan);
   font-weight: bold;
   border: none;
@@ -157,4 +154,17 @@ text-align: end;
 
 .tipInfo > h1{
   font-size: 1rem;
+}
+
+
+@media  (max-width:768px) {
+  .card{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputsContainer{
+    flex-direction: column;
+  }
 }

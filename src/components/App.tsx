@@ -55,12 +55,12 @@ function App() {
               <button onClick={()=>setTip(50)}>50%</button>
               <button className={customBtn} onClick={()=>setCustom(true)}>
                 {!custom &&<div>Custom</div>}
-                {custom && (
-
-<input type="number" className={customInput} value={customTip} onChange={(e)=>setCustomTip(parseInt(e.target.value))} />
-
-
-                )}
+                {custom && 
+                    <input className={customInput}  
+                    type="number" 
+                    value={customTip}
+                     onChange={(e)=>setCustomTip(parseInt(e.target.value))} />
+                }
               </button>
             </div>
           </div>
