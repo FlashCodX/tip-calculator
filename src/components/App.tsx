@@ -23,27 +23,43 @@ function App() {
   } = styles;
 
 
-  const [bill, setBill] = useState(142.55)
-  const [people, setPeople] = useState(5)
-  const [tip, setTip] = useState(0.15);
+  const [bill, setBill] = useState('142.55')
+  const [people, setPeople] = useState('5')
+  const [tip, setTip] = useState('0.15');
   const [custom, setCustom] = useState(false);
   const [customTip, setCustomTip] = useState(0);
 
 
 const calculateTotal = ()=> 
 {
- const value= (bill+(bill*tip)/people).toFixed(2)
- return parseFloat(value) ? value: 0 
+ 
+
+
+  //check for valid inputs
+  if (isNaN(parseFloat(bill)) || isNaN(parseInt(people)) || isNaN( parseFloat(tip))) return
+  
+  
+console.log('hello')
+
+
+    // const value = ((bill+(bill*tip))/parseInt(people)).toFixed(2)
+    // return parseInt(value) ? value: 0 
 }
 const calculateTipAmount = () => {
-  const value= (bill*tip/people).toFixed(2)
-  return parseFloat(value) ? value: 0 
+  return 0
+  // const value= (bill*tip/parseInt(people)).toFixed(2)
+  // return parseFloat(value) ? value: 0 
 }
 
 const performReset=()=>{
-  setBill(142.55) 
-  setPeople(5) 
-  setTip(0.15)
+  // setBill(142.55) 
+  setPeople('5') 
+  // setTip(0.15)
+}
+
+
+const handlePeopleInput = (value:any)=>{
+  setPeople(value)
 }
 
 
@@ -60,7 +76,7 @@ const performReset=()=>{
             <div className={inputContainer}>
               <img src={dollar} alt="dollar" />
               <input type="number" value={bill} 
-              onChange={(e)=>setBill(parseFloat(e.target.value))} />
+             />
             </div>
           </div>
 
@@ -98,12 +114,14 @@ const performReset=()=>{
           <div className={peopleContainer}>
             <div className={peopleHeaderContainer}>
             <h1 className={label}>Number of People</h1>
-             <p>Can't be zero</p>
+            {people==='0' &&<p>Can't be zero</p>
+            
+            }
             </div>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
               <input className={customInput} value={people} 
-              onChange={(e)=>setPeople(parseInt(e.target.value))} 
+              onChange={(e)=>handlePeopleInput(e.target.value)} 
               type="number" />
             </div>
           </div>
@@ -120,12 +138,11 @@ const performReset=()=>{
 
           <div className={tipAmount}>
             <div className={tipInfo}>
-              <h1>Tip Amount</h1>
+              <h1>Total</h1>
               <p>/ Person</p>
             </div>
             <p>${calculateTotal()}</p>
           </div>
-
           <button onClick={()=>performReset()}>Reset</button>
         </div>
       </div>
