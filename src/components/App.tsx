@@ -15,6 +15,7 @@ function App() {
     resultsContainer,
     tipAmount,
     customInput,
+    peopleHeaderContainer,
     label,
     boxContainer,
     customBtn,
@@ -22,11 +23,28 @@ function App() {
   } = styles;
 
 
-  const [bill, setBill] = useState(0)
-  const [people, setPeople] = useState(0)
-  const [tip, setTip] = useState(5);
+  const [bill, setBill] = useState(142.55)
+  const [people, setPeople] = useState(5)
+  const [tip, setTip] = useState(0.15);
   const [custom, setCustom] = useState(false);
   const [customTip, setCustomTip] = useState(0);
+
+
+const calculateTotal = ()=> 
+{
+ const value= (bill+(bill*tip)/people).toFixed(2)
+ return parseFloat(value) ? value: 0 
+}
+const calculateTipAmount = () => {
+  const value= (bill*tip/people).toFixed(2)
+  return parseFloat(value) ? value: 0 
+}
+
+const performReset=()=>{
+  setBill(142.55) 
+  setPeople(5) 
+  setTip(0.15)
+}
 
 
 
@@ -41,18 +59,30 @@ function App() {
             <h1 className={label}>Bill</h1>
             <div className={inputContainer}>
               <img src={dollar} alt="dollar" />
-              <input type="number" />
+              <input type="number" value={bill} 
+              onChange={(e)=>setBill(parseFloat(e.target.value))} />
             </div>
           </div>
 
           <div className={boxContainer}>
-            <h1 className={label}>Select Top %</h1>
+            <h1 className={label}>Select Tip %</h1>
             <div className={tips}>
-              <button onClick={()=>setTip(5)}>5%</button>
-              <button onClick={()=>setTip(10)}>10%</button>
-              <button onClick={()=>setTip(15)}>15%</button>
-              <button onClick={()=>setTip(25)}>25%</button>
-              <button onClick={()=>setTip(50)}>50%</button>
+              <button 
+              style={tip===0.05 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} } 
+               onClick={()=>setTip(0.05)}>5%</button>
+              <button 
+               style={tip===0.1 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
+              onClick={()=>setTip(0.1)}>10%</button>
+              <button 
+              style={tip===0.15 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
+              onClick={()=>setTip(0.15)}>15%</button>
+              <button 
+              style={tip===0.25 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
+              
+              onClick={()=>setTip(0.25)}>25%</button>
+              <button
+              style={tip===0.50 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
+              onClick={()=>setTip(0.5)}>50%</button>
               <button className={customBtn} onClick={()=>setCustom(true)}>
                 {!custom &&<div>Custom</div>}
                 {custom && 
@@ -66,10 +96,15 @@ function App() {
           </div>
 
           <div className={peopleContainer}>
+            <div className={peopleHeaderContainer}>
             <h1 className={label}>Number of People</h1>
+             <p>Can't be zero</p>
+            </div>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
-              <input className={customInput} type="number" />
+              <input className={customInput} value={people} 
+              onChange={(e)=>setPeople(parseInt(e.target.value))} 
+              type="number" />
             </div>
           </div>
         </div>
@@ -80,7 +115,7 @@ function App() {
               <h1>Tip Amount</h1>
               <p>/ Person</p>
             </div>
-            <p>$4.27</p>
+            <p>${calculateTipAmount()}</p>
           </div>
 
           <div className={tipAmount}>
@@ -88,13 +123,12 @@ function App() {
               <h1>Tip Amount</h1>
               <p>/ Person</p>
             </div>
-            <p>$4.27</p>
+            <p>${calculateTotal()}</p>
           </div>
 
-          <button>Reset</button>
+          <button onClick={()=>performReset()}>Reset</button>
         </div>
       </div>
-      {/* <Preview /> */}
     </main>
   );
 }
