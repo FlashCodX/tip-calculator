@@ -1,6 +1,6 @@
 .container{
   min-height: 100vh;
-  background: var(--app-background) ;
+  background: var(--very-light-grayish) ;
   display: flex;
   flex-direction: column;
   justify-content: center;
