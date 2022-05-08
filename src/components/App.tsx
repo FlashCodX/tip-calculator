@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/app.module.css";
 
 const dollar = require("../assets/icon-dollar.svg").default;
@@ -22,47 +22,32 @@ function App() {
     tipInfo,
   } = styles;
 
-
-  const [bill, setBill] = useState('142.55')
-  const [people, setPeople] = useState('5')
-  const [tip, setTip] = useState('0.15');
-  const [custom, setCustom] = useState(false);
-  const [customTip, setCustomTip] = useState(0);
+  const [custom,setCustom] = useState(false)
+  const [customTip,setCustomTip]= useState(0)
 
 
-const calculateTotal = ()=> 
-{
+  const [bill,setBill] = useState(142.55)
+  const [nPeople,setNPeople]= useState(5)
+  const [tip,setTip]= useState(0.15)
+  const [totalTipAmount,setTotalTipAmount]= useState(bill*(custom? tip:customTip)/nPeople)
+  const [total,setTotal]= useState(((bill+(bill*(custom? tip:customTip)))/nPeople))
+
+
  
 
 
-  //check for valid inputs
-  if (isNaN(parseFloat(bill)) || isNaN(parseInt(people)) || isNaN( parseFloat(tip))) return
-  
-  
-console.log('hello')
+  useEffect(()=>{
+    setTotal(((bill+(bill*tip))/nPeople))
+    setTotalTipAmount(bill*tip/nPeople)
+    console.log('test')
+  },[bill,nPeople,tip])
 
-
-    // const value = ((bill+(bill*tip))/parseInt(people)).toFixed(2)
-    // return parseInt(value) ? value: 0 
-}
-const calculateTipAmount = () => {
-  return 0
-  // const value= (bill*tip/parseInt(people)).toFixed(2)
-  // return parseFloat(value) ? value: 0 
-}
 
 const performReset=()=>{
-  // setBill(142.55) 
-  setPeople('5') 
-  // setTip(0.15)
+  setBill(142.55) 
+  setNPeople(5) 
+  setTip(0.15)
 }
-
-
-const handlePeopleInput = (value:any)=>{
-  setPeople(value)
-}
-
-
 
   return (
     <main className={container}>
@@ -75,7 +60,12 @@ const handlePeopleInput = (value:any)=>{
             <h1 className={label}>Bill</h1>
             <div className={inputContainer}>
               <img src={dollar} alt="dollar" />
-              <input type="number" value={bill} 
+              <input type="number"
+              onChange={(e)=>{
+                setBill(parseFloat(e.target.value))
+              
+              } }
+              value={bill} 
              />
             </div>
           </div>
@@ -104,8 +94,8 @@ const handlePeopleInput = (value:any)=>{
                 {custom && 
                     <input className={customInput}  
                     type="number" 
-                    value={customTip}
-                     onChange={(e)=>setCustomTip(parseInt(e.target.value))} />
+                    value={tip}
+                     onChange={(e)=>setTip(parseFloat(e.target.value))} />
                 }
               </button>
             </div>
@@ -114,14 +104,14 @@ const handlePeopleInput = (value:any)=>{
           <div className={peopleContainer}>
             <div className={peopleHeaderContainer}>
             <h1 className={label}>Number of People</h1>
-            {people==='0' &&<p>Can't be zero</p>
+            {nPeople===0 &&<p>Can't be zero</p>
             
             }
             </div>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
-              <input className={customInput} value={people} 
-              onChange={(e)=>handlePeopleInput(e.target.value)} 
+              <input className={customInput} value={nPeople} 
+              onChange={(e)=>setNPeople(parseInt(e.target.value))} 
               type="number" />
             </div>
           </div>
@@ -133,7 +123,7 @@ const handlePeopleInput = (value:any)=>{
               <h1>Tip Amount</h1>
               <p>/ Person</p>
             </div>
-            <p>${calculateTipAmount()}</p>
+            <p>${totalTipAmount.toFixed(2)}</p>
           </div>
 
           <div className={tipAmount}>
@@ -141,7 +131,7 @@ const handlePeopleInput = (value:any)=>{
               <h1>Total</h1>
               <p>/ Person</p>
             </div>
-            <p>${calculateTotal()}</p>
+            <p>${total.toFixed(2)}</p>
           </div>
           <button onClick={()=>performReset()}>Reset</button>
         </div>
