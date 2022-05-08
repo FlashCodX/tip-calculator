@@ -29,18 +29,15 @@ function App() {
   const [bill,setBill] = useState(142.55)
   const [nPeople,setNPeople]= useState(5)
   const [tip,setTip]= useState(0.15)
-  const [totalTipAmount,setTotalTipAmount]= useState(bill*(custom? tip:customTip)/nPeople)
-  const [total,setTotal]= useState(((bill+(bill*(custom? tip:customTip)))/nPeople))
-
-
- 
+  const [totalTipAmount,setTotalTipAmount]= useState(bill*(custom? customTip/100:tip)/nPeople)
+  const [total,setTotal]= useState(((bill+(bill*(custom? customTip/100:tip)))/nPeople))
 
 
   useEffect(()=>{
-    setTotal(((bill+(bill*tip))/nPeople))
-    setTotalTipAmount(bill*tip/nPeople)
-    console.log('test')
-  },[bill,nPeople,tip])
+    setTotal(((bill+(bill*(custom ? customTip/100:tip)))/nPeople))
+    setTotalTipAmount(bill*(custom? customTip/100:tip)/nPeople)
+    console.log(customTip/100)
+  },[bill,nPeople,tip,customTip,custom])
 
 
 const performReset=()=>{
@@ -69,33 +66,45 @@ const performReset=()=>{
              />
             </div>
           </div>
-
           <div className={boxContainer}>
             <h1 className={label}>Select Tip %</h1>
             <div className={tips}>
               <button 
               style={tip===0.05 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} } 
-               onClick={()=>setTip(0.05)}>5%</button>
+               onClick={()=>{
+                 setCustom(false)
+                 setTip(0.05)}}>5%</button>
               <button 
                style={tip===0.1 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
-              onClick={()=>setTip(0.1)}>10%</button>
+              onClick={()=>{
+                setCustom(false)
+                setTip(0.1)
+              }}>10%</button>
               <button 
               style={tip===0.15 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
-              onClick={()=>setTip(0.15)}>15%</button>
+              onClick={()=>{
+                setCustom(false)
+               setTip(0.15)}}>15%</button>
               <button 
               style={tip===0.25 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
               
-              onClick={()=>setTip(0.25)}>25%</button>
+              onClick={()=>{
+                setCustom(false)
+                setTip(0.25)
+              }}>25%</button>
               <button
               style={tip===0.50 ?{background:'var(--app-background)'}:{background:'var(--card-background)'} }
-              onClick={()=>setTip(0.5)}>50%</button>
+              onClick={()=>{
+                setCustom(false)
+                setTip(0.5)
+              }}>50%</button>
               <button className={customBtn} onClick={()=>setCustom(true)}>
                 {!custom &&<div>Custom</div>}
                 {custom && 
                     <input className={customInput}  
                     type="number" 
-                    value={tip}
-                     onChange={(e)=>setTip(parseFloat(e.target.value))} />
+                    value={customTip}
+                     onChange={(e)=>setCustomTip(parseFloat(e.target.value))} />
                 }
               </button>
             </div>
@@ -110,7 +119,7 @@ const performReset=()=>{
             </div>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
-              <input className={customInput} value={nPeople} 
+              <input  value={nPeople} 
               onChange={(e)=>setNPeople(parseInt(e.target.value))} 
               type="number" />
             </div>
