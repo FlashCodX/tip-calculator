@@ -4,8 +4,7 @@
 
 A challenge made for Frontend Mentor.
 
-<!--
-> Check it out: [https://FlashCodX.github.io/intro-section/](https://FlashCodX.github.io/intro-section/) -->
+> Check it out: [https://FlashCodX.github.io/tip-calculator/](https://FlashCodX.github.io/tip-calculator/)
 
 ## Tech
 

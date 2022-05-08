@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/app.module.css";
+import Footer from "./Footer";
 
 const dollar = require("../assets/icon-dollar.svg").default;
 const person = require("../assets/icon-person.svg").default;
@@ -36,7 +37,6 @@ function App() {
   useEffect(()=>{
     setTotal(((bill+(bill*(custom ? customTip/100:tip)))/nPeople))
     setTotalTipAmount(bill*(custom? customTip/100:tip)/nPeople)
-    console.log(customTip/100)
   },[bill,nPeople,tip,customTip,custom])
 
 
@@ -47,7 +47,8 @@ const performReset=()=>{
 }
 
   return (
-    <main className={container}>
+    <>
+     <main className={container}>
       <h1>
         Spli <br /> tter
       </h1>
@@ -58,10 +59,7 @@ const performReset=()=>{
             <div className={inputContainer}>
               <img src={dollar} alt="dollar" />
               <input type="number"
-              onChange={(e)=>{
-                setBill(parseFloat(e.target.value))
-              
-              } }
+              onChange={(e)=> e.target.value === ''? setBill(0) :setBill(parseFloat(e.target.value)) }
               value={bill} 
              />
             </div>
@@ -113,14 +111,14 @@ const performReset=()=>{
           <div className={peopleContainer}>
             <div className={peopleHeaderContainer}>
             <h1 className={label}>Number of People</h1>
-            {nPeople===0 &&<p>Can't be zero</p>
+            {(nPeople===0 || isNaN(nPeople) ) &&<p>Can't be zero</p>
             
             }
             </div>
             <div className={inputContainer}>
               <img src={person} alt="dollar" />
               <input  value={nPeople} 
-              onChange={(e)=>setNPeople(parseInt(e.target.value))} 
+              onChange={(e)=>e.target.value === '' ?setNPeople(0): setNPeople(parseInt(e.target.value))} 
               type="number" />
             </div>
           </div>
@@ -132,7 +130,7 @@ const performReset=()=>{
               <h1>Tip Amount</h1>
               <p>/ Person</p>
             </div>
-            <p>${totalTipAmount.toFixed(2)}</p>
+            <p>${!isNaN(totalTipAmount)?totalTipAmount.toFixed(2):0}</p>
           </div>
 
           <div className={tipAmount}>
@@ -140,12 +138,15 @@ const performReset=()=>{
               <h1>Total</h1>
               <p>/ Person</p>
             </div>
-            <p>${total.toFixed(2)}</p>
+            <p>${!isNaN(total)? total.toFixed(2):0}</p>
           </div>
           <button onClick={()=>performReset()}>Reset</button>
         </div>
       </div>
     </main>
+    <Footer/>
+    </>
+   
   );
 }
 

@@ -121,6 +121,12 @@ text-align: end;
   justify-content: space-between;
 }
 
+.peopleContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .peopleHeaderContainer > p{
   color: red;
   font-size: 1.1rem;
@@ -165,6 +171,25 @@ text-align: end;
   overflow: auto;
 }
 
+.tipAmount > p::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 
 
 .tipInfo > h1{
@@ -174,10 +199,15 @@ text-align: end;
 
 @media  (max-width:768px) {
   .card{
+    padding: 20px;
     width: 90%;
     gap: 20px;
     display: flex;
     flex-direction: column;
+  }
+
+  .customInput{
+   max-width: 100% ;
   }
 
   .inputsContainer{
@@ -187,6 +217,10 @@ text-align: end;
   .tips{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+  }
+
+  .tips > button{
+    min-width: 100%;
   }
 
 }
